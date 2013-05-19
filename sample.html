@@ -1,0 +1,322 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>jquery.forwardpop.js | DEMO</title>
+		<script src="scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+		<script src="scripts/jquery.forwardpop.js" type="text/javascript"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles/setup.css" />
+		<link rel="stylesheet" href="styles/modules.css" />
+		<script type="text/javascript">
+			$(window).load(function(){
+				$.forwardpop
+					.init({
+						defMinWidth: 500,
+						tpl:function(src, minWidth, title, item){
+							var fin = '';
+							fin += '<!doctype html>';
+							fin += '<html>';
+							fin += '<head>';
+							fin += '<meta charset="UTF-8" />';
+							fin += '<meta name="viewport" content="width='+(20+minWidth)+'" />';
+							fin += '<title>'+$('<div/>').text( title ).html()+' | jquery.forwardpop.js | DEMO</title>';
+							fin += '<link rel="stylesheet" href="styles/setup.css" />'+"\n";
+							fin += '<link rel="stylesheet" href="styles/modules.css" />'+"\n";
+							fin += '</head>';
+							fin += '<body>';
+							fin += '<div id="content" class="contents">';
+							fin += '<div style="width:'+minWidth+'px; margin:0 auto;">'+src+'</div>';
+							fin += '</div>';
+							fin += '</body>';
+							fin += '</html>';
+							return fin;
+						},
+						defTitle: 'コンテンツ'
+					})
+					.addElements('.forwardpop')
+					.addElements('.forwardpop400', 400)
+				;
+			});
+		</script>
+		<style type="text/css">
+			#content{
+				width:auto;
+				max-width:800px;
+			}
+			#content .code{
+				>width:300px;
+				>overflow:auto;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1>jquery.forwardpop.js のデモコンテンツ</h1>
+		<div id="content" class="contents">
+
+<h2>実演</h2>
+
+<p>次のテーブルは、デフォルトの 500px を最小幅として調整されます。</p>
+<p>デフォルトの最小幅は、初期化時に init() の引数として設定します。</p>
+
+<div class="forwardpop">
+	<table class="def" style="width:100%;">
+		<thead>
+			<tr>
+				<th>1つ目のテーブル要素</th>
+				<td>1つ目のテーブル要素</td>
+				<td>1つ目のテーブル要素</td>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>1つ目のテーブル要素</th>
+				<td>1つ目のテーブル要素</td>
+				<td>1つ目のテーブル要素</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<th>{$string}</th>
+				<td>{$string}</td>
+				<td>{$string}</td>
+			</tr>
+			<tr>
+				<th>{$string}</th>
+				<td>{$string}</td>
+				<td>{$string}</td>
+			</tr>
+		</tbody>
+	</table><!-- /table.def -->
+
+</div><!-- /.forwardpop -->
+
+<p>次のテーブルは、独自属性 data-min-width で、最小幅を 700 に変更しています。</p>
+
+
+<div class="forwardpop" data-min-width="700" data-title="テーブル1">
+	<table class="def" style="width:100%;">
+		<thead>
+			<tr>
+				<th>2つ目のテーブル要素</th>
+				<td>2つ目のテーブル要素</td>
+				<td>2つ目のテーブル要素</td>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>2つ目のテーブル要素</th>
+				<td>2つ目のテーブル要素</td>
+				<td>2つ目のテーブル要素</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<th>{$string}</th>
+				<td>{$string}</td>
+				<td>{$string}</td>
+			</tr>
+			<tr>
+				<th>{$string}</th>
+				<td>{$string}</td>
+				<td>{$string}</td>
+			</tr>
+		</tbody>
+	</table><!-- /table.def -->
+
+</div><!-- /.forwardpop -->
+
+
+<p>次のテーブルは、addElements() の第2引数で、最小幅を 400 に変更しています。</p>
+
+<div class="forwardpop400">
+	<table class="def" style="width:100%;">
+		<thead>
+			<tr>
+				<th>3つ目のテーブル要素</th>
+				<td>3つ目のテーブル要素</td>
+				<td>3つ目のテーブル要素</td>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>3つ目のテーブル要素</th>
+				<td>3つ目のテーブル要素</td>
+				<td>3つ目のテーブル要素</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			<tr>
+				<th>{$string}</th>
+				<td>{$string}</td>
+				<td>{$string}</td>
+			</tr>
+			<tr>
+				<th>{$string}</th>
+				<td>{$string}</td>
+				<td>{$string}</td>
+			</tr>
+		</tbody>
+	</table><!-- /table.def -->
+
+</div><!-- /.forwardpop -->
+
+
+<h2>サンプルソース</h2>
+
+<h3>基本の処理</h3>
+
+
+<div class="unit">
+	<div class="code"><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+	$(window).load(function(){
+		$.forwardpop
+			.init({
+				defMinWidth: 500,//デフォルトの最小幅
+				tpl:function(src, minWidth, title, item){//ポップアップウィンドウのテンプレートメソッド
+					var fin = '';
+					fin += '&lt;!doctype html&gt;';
+					fin += '&lt;html&gt;';
+					fin += '&lt;head&gt;';
+					fin += '&lt;meta charset=&quot;UTF-8&quot; /&gt;';
+					fin += '&lt;meta name=&quot;viewport&quot; content=&quot;width='+(20+minWidth)+'&quot; /&gt;';
+					fin += '&lt;title&gt;'+$('&lt;div/&gt;').text( title ).html()+' | jquery.forwardpop.js | DEMO&lt;/title&gt;';
+					fin += '&lt;link rel=&quot;stylesheet&quot; href=&quot;styles/setup.css&quot; /&gt;'+&quot;\n&quot;;
+					fin += '&lt;link rel=&quot;stylesheet&quot; href=&quot;styles/modules.css&quot; /&gt;'+&quot;\n&quot;;
+					fin += '&lt;/head&gt;';
+					fin += '&lt;body&gt;';
+					fin += '&lt;div id=&quot;content&quot; class=&quot;contents&quot;&gt;';
+					fin += '&lt;div style=&quot;width:'+minWidth+'px; margin:0 auto;&quot;&gt;'+src+'&lt;/div&gt;';
+					fin += '&lt;/div&gt;';
+					fin += '&lt;/body&gt;';
+					fin += '&lt;/html&gt;';
+					return fin;
+				},
+				defTitle: 'コンテンツ'//コンテンツのデフォルトのタイトル
+			})
+			.addElements('.forwardpop')
+		;
+	});
+&lt;/script&gt;
+&lt;div class=&quot;forwardpop&quot;&gt;
+	&lt;!-- フィットさせるコンテンツ --&gt;
+&lt;/div&gt;
+</code></pre></div>
+</div>
+
+
+<h3>.addElements() の第2引数による最小幅の変更</h3>
+
+<div class="unit">
+	<div class="code"><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+	$(window).load(function(){
+		$.forwardpop
+			.init(500,1)
+			.addElements('.forwardpop')
+			.addElements('.forwardpop400', 400)//第2引数で最小幅を上書きできる
+		;
+	});
+&lt;/script&gt;
+&lt;div class=&quot;forwardpop400&quot;&gt;
+	&lt;!-- フィットさせるコンテンツ --&gt;
+&lt;/div&gt;
+</code></pre></div>
+</div>
+
+
+<h3>属性 data-min-width による最小幅の変更</h3>
+
+<div class="unit">
+	<div class="code"><pre><code>&lt;div class=&quot;forwardpop&quot; data-min-width=&quot;700&quot;&gt;
+	&lt;!-- フィットさせるコンテンツ --&gt;
+	&lt;!-- data-min-width による指定が最も強い --&gt;
+&lt;/div&gt;
+</code></pre></div>
+</div>
+
+
+<h2>動作確認済みブラウザ</h2>
+
+<table class="def" style="width:100%;">
+	<thead>
+		<tr>
+			<th>OS</th>
+			<th>ブラウザ/バージョン</th>
+			<th>動作</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>OS</th>
+			<th>ブラウザ/バージョン</th>
+			<th>動作</th>
+		</tr>
+	</tfoot>
+	<tbody>
+		<tr>
+			<th rowspan="4">Mac OS X</th>
+			<th>Google Chrome 26.0.1410.65</th>
+			<td class="center">○</td>
+		</tr>
+		<tr>
+			<th>Safari 6.0.4 (8536.29.13)</th>
+			<td class="center">○</td>
+		</tr>
+		<tr>
+			<th>Firefox 21.0</th>
+			<td class="center">○<br />(ただし、ローディング表示が止まらない？)</td>
+		</tr>
+		<tr>
+			<th>Opera 12.15</th>
+			<td class="center">○</td>
+		</tr>
+		<tr>
+			<th rowspan="7">Windows 7</th>
+			<th>Google Chrome 26.0.1410.64 m</th>
+			<td class="center">○</td>
+		</tr>
+		<tr>
+			<th>Safari 5.1.7 (7534.57.2)</th>
+			<td class="center">○</td>
+		</tr>
+		<tr>
+			<th>Firefox 21.0</th>
+			<td class="center">○</td>
+		</tr>
+		<tr>
+			<th>IE 9</th>
+			<td class="center">○</td>
+		</tr>
+		<tr>
+			<th>IE 8 (IETester)</th>
+			<td class="center">×</td>
+		</tr>
+		<tr>
+			<th>IE 7 (IETester)</th>
+			<td class="center">×</td>
+		</tr>
+		<tr>
+			<th>IE 6 (IETester)</th>
+			<td class="center">×</td>
+		</tr>
+		<tr>
+			<th rowspan="2">iPhone 5 / iOS 6.0</th>
+			<th>Safari</th>
+			<td class="center">○</td>
+		</tr>
+		<tr>
+			<th>Chrome 26.0.1410.53</th>
+			<td class="center">△<br />(ポップアップウィンドウ上でCSSが適用されていない)</td>
+		</tr>
+	</tbody>
+</table><!-- /table.def -->
+
+
+		</div><!-- /#content -->
+
+<hr />
+<p class="center">&copy; Tomoya Koyanagi.</p>
+
+	</body>
+</html>

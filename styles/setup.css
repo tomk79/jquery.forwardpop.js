@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+/**
+ * リセット処理
+ */
+body{
+	text-align:left;
+	color:#333333;
+	font-size-adjust:none;
+	-webkit-text-size-adjust:100%;/* Mobile Safari : 文字サイズの自動調整をオフに */
+}
+body,input,textarea,select,option,button{
+	font-family:"メイリオ", sans-serif;
+	font-size:medium;
+	line-height:1.7;
+}
+table{
+	border-collapse:collapse;
+}
+td, th{
+	empty-cells:show;
+	vertical-align:top;
+}
+img{
+	border:0px;
+	vertical-align:bottom;
+	max-width:100%;
+}
+p{
+	display:block;
+	padding:0px;
+}
+div{
+	display:block;
+	padding:0px;
+	margin:0px;
+}
+pre{
+	font-family:monospace,sans-serif;
+}
+address{
+	font-style:normal;
+	text-decoration:none;
+}
+form{
+	display:inline;
+}
+span{
+	display:inline;
+	padding:0px;
+	margin:0px;
+}
+ul>li{
+	list-style-type: disc;
+}
+ol>li{
+	list-style-type: decimal;
+}
+a {
+	text-decoration: none;
+}
+a , a *{ cursor:pointer; }
+
+p ,
+address ,
+pre ,
+ul ,
+ol ,
+dl ,
+blockquote{
+	margin-top:1em;
+	margin-bottom:1.5em;
+}
+
+h1 ,
+h2 ,
+h3 ,
+h4 ,
+h5 ,
+h6 {
+	font-size:100%;
+	padding:0px;
+	margin-top:1em;
+	margin-bottom:0.5em;
+	color: #000;
+}
+h1{
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+	margin: 0;
+	font-size:160%;
+	font-weight: bold;
+}
+h2{
+	margin-top:1.5em;
+	font-size:143%;
+}
+h3{
+	font-size:123%;
+}
+h4{
+	font-size:108%;
+}
+
+/**
+ * コンテンツ領域
+ * div.contents が、テーマとコンテンツの領域の境界線となる。
+ */
+div.contents{
+	display:block !important;
+	text-align:left;
+	border-top: 1px solid #555;
+	padding: 30px 0;
+}
+
+
