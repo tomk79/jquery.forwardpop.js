@@ -13,25 +13,26 @@
 				$.forwardpop
 					.init({
 						defMinWidth: 500,
-						tpl:function(src, minWidth, title, item){
+						tpl:function(opts){
 							var fin = '';
 							fin += '<!doctype html>';
 							fin += '<html>';
 							fin += '<head>';
 							fin += '<meta charset="UTF-8" />';
-							fin += '<meta name="viewport" content="width='+(20+minWidth)+'" />';
-							fin += '<title>'+$('<div/>').text( title ).html()+' | jquery.forwardpop.js | DEMO</title>';
+							fin += '<meta name="viewport" content="width='+(20+opts.minWidth)+'" />';
+							fin += '<title>'+$('<div/>').text( opts.title ).html()+' | jquery.forwardpop.js | DEMO</title>';
 							fin += '<link rel="stylesheet" href="styles/setup.css" />'+"\n";
 							fin += '<link rel="stylesheet" href="styles/modules.css" />'+"\n";
 							fin += '</head>';
 							fin += '<body>';
 							fin += '<div id="content" class="contents">';
-							fin += '<div style="width:'+minWidth+'px; margin:0 auto;">'+src+'</div>';
+							fin += '<div style="width:'+(opts.minWidth)+'px; margin:0 auto;">'+opts.elmSrc+'</div>';
 							fin += '</div>';
 							fin += '</body>';
 							fin += '</html>';
 							return fin;
 						},
+						tplLink: '<p><a href="javascript:$.forwardpop.open({$itemId});">{$itemTitle}を見る</a></p>',
 						defTitle: 'コンテンツ'
 					})
 					.addElements('.forwardpop')
@@ -174,25 +175,27 @@
 		$.forwardpop
 			.init({
 				defMinWidth: 500,//デフォルトの最小幅
-				tpl:function(src, minWidth, title, item){//ポップアップウィンドウのテンプレートメソッド
+				tpl:function(opts){//ポップアップウィンドウのテンプレートメソッド
 					var fin = '';
 					fin += '&lt;!doctype html&gt;';
 					fin += '&lt;html&gt;';
 					fin += '&lt;head&gt;';
 					fin += '&lt;meta charset=&quot;UTF-8&quot; /&gt;';
-					fin += '&lt;meta name=&quot;viewport&quot; content=&quot;width='+(20+minWidth)+'&quot; /&gt;';
-					fin += '&lt;title&gt;'+$('&lt;div/&gt;').text( title ).html()+' | jquery.forwardpop.js | DEMO&lt;/title&gt;';
+					fin += '&lt;meta name=&quot;viewport&quot; content=&quot;width='+(20+opts.minWidth)+'&quot; /&gt;';
+					fin += '&lt;title&gt;'+$('&lt;div/&gt;').text( opts.title ).html()+' | jquery.forwardpop.js | DEMO&lt;/title&gt;';
 					fin += '&lt;link rel=&quot;stylesheet&quot; href=&quot;styles/setup.css&quot; /&gt;'+&quot;\n&quot;;
 					fin += '&lt;link rel=&quot;stylesheet&quot; href=&quot;styles/modules.css&quot; /&gt;'+&quot;\n&quot;;
 					fin += '&lt;/head&gt;';
 					fin += '&lt;body&gt;';
 					fin += '&lt;div id=&quot;content&quot; class=&quot;contents&quot;&gt;';
-					fin += '&lt;div style=&quot;width:'+minWidth+'px; margin:0 auto;&quot;&gt;'+src+'&lt;/div&gt;';
+					fin += '&lt;div style=&quot;width:'+(opts.minWidth)+'px; margin:0 auto;&quot;&gt;'+opts.elmSrc+'&lt;/div&gt;';
 					fin += '&lt;/div&gt;';
 					fin += '&lt;/body&gt;';
 					fin += '&lt;/html&gt;';
 					return fin;
 				},
+				tplLink: '&lt;p&gt;&lt;a href=&quot;javascript:$.forwardpop.open({$itemId});&quot;&gt;{$itemTitle}を見る&lt;/a&gt;&lt;/p&gt;',
+					//ポップアップを開くリンクのテンプレート
 				defTitle: 'コンテンツ'//コンテンツのデフォルトのタイトル
 			})
 			.addElements('.forwardpop')
@@ -264,8 +267,8 @@
 			<td class="center">○</td>
 		</tr>
 		<tr>
-			<th>Firefox 21.0</th>
-			<td class="center">○<br />(ただし、ローディング表示が止まらない？)</td>
+			<th>Firefox 23.0</th>
+			<td class="center">○</td>
 		</tr>
 		<tr>
 			<th>Opera 12.15</th>

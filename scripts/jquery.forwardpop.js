@@ -1,5 +1,5 @@
 /**
- * jquery.forwardpop.js
+ * jquery.forwardpop.js 0.1.0
  * @author Tomoya Koyanagi <tomk79@gmail.com>
  */
 (function($){
@@ -7,7 +7,8 @@
 	var _defMinWidth = 0;
 	var _defTitle = '内容';
 	var _id = 0;
-	var _tpl = function(src, minWidth, title, item){ var prt = ''; prt += '<html><head><meta name="viewport" content="width='+(20+minWidth)+'" /><title>'+$('<div/>').text( title ).html()+'</title></head><body><div style="width:'+minWidth+'px; margin:0 auto;">'+src+'</div></body></html>'; return prt; }
+	var _tpl = function(opts){ var prt = ''; prt += '<html><head><meta name="viewport" content="width='+(20+opts.minWidth)+'" /><title>'+$('<div/>').text( opts.title ).html()+'</title></head><body><div style="width:'+opts.minWidth+'px; margin:0 auto;">'+opts.elmSrc+'</div></body></html>'; return prt; }
+	var _tplLink = '<p><a href="javascript:$.forwardpop.open({$itemId});">{$itemTitle}を見る</a></p>';
 
 	var isZoom = navigator.userAgent.indexOf('MSIE')>0 || navigator.userAgent.indexOf('AppleWebKit')>0;
 	// isZoom = true;
@@ -22,12 +23,31 @@
 		var zoom = tw/uw;
 
 		if(zoom < 1){
-			item.elm.html('<p><a href="javascript:$.forwardpop.open('+item.id+');">'+$('<div/>').text( item.title ).html()+'を見る</a></p>');
+			var options = {itemId:item.id, itemTitle: item.title};
+			if( typeof(_tplLink) == 'function' ){
+				item.elm.html( _tplLink(options) );
+			}else{
+				item.elm.html( bindContents(_tplLink, options) );
+			}
 		}else{
 			item.elm.html(item.elmSrc);
 		}
 
 	}
+
+	/**
+	 * テンプレートにコンテンツをバインドする
+	 */
+	function bindContents(tpl, data){
+		var rtn = '';
+		while( tpl.match(new RegExp('^(.*?)\\{\\$([a-zA-Z0-9]+)\\}(.*)$','mg') ) ){
+			rtn += RegExp.$1;
+			rtn += data[RegExp.$2];
+			tpl = RegExp.$3;
+		}
+		rtn += tpl;
+		return rtn;
+	}//bindContents();
 
 	/**
 	 * id から アイテムを探す。
@@ -54,6 +74,9 @@
 			if(opt.tpl){
 				_tpl = opt.tpl;
 			}
+			if(opt.tplLink){
+				_tplLink = opt.tplLink;
+			}
 			if(opt.defTitle){
 				_defTitle = opt.defTitle;
 			}
@@ -72,6 +95,7 @@
 						elm: $(this) ,
 						elmSrc: $(this)[0].innerHTML,
 						title: _defTitle,
+						tplLink: _tplLink,
 						minWidth: (minWidth?minWidth:_defMinWidth)
 					};
 					if(item.elm[0].attributes['data-min-width']){
@@ -98,7 +122,13 @@
 			var newWin = window.open('');
 			var item = getItemById(id);
 			var src = '';
-			src += _tpl( item.elmSrc, item.minWidth, item.title, item );
+
+			var options = {elmSrc: item.elmSrc, minWidth: item.minWidth, title: item.title, item:item};
+			if( typeof(_tpl) == 'function' ){
+				src += _tpl( options );
+			}else{
+				src += bindContents(_tpl, options);
+			}
 			newWin.document.write(src);
 			newWin.document.close();
 		}
