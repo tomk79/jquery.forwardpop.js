@@ -1,5 +1,5 @@
 /**
- * jquery.forwardpop.js 0.1.0
+ * jquery.forwardpop.js 0.1.0-nb
  * @author Tomoya Koyanagi <tomk79@gmail.com>
  */
 (function($){
