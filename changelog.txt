@@ -1,0 +1,7 @@
+/**
+ * jquery.forwardpop.js 更新履歴
+ */
+
+■jquery.forwardpop.js 0.1.0 (2013-08-13)
+
+- 初回リリース。
