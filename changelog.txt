@@ -2,6 +2,11 @@
  * jquery.forwardpop.js 更新履歴
  */
 
+■jquery.forwardpop.js 0.1.1 (2013-08-15)
+
+- Android 4系 で、初回表示時の要素置換が aundefined と表示される不具合を修正。
+
+
 ■jquery.forwardpop.js 0.1.0 (2013-08-13)
 
 - 初回リリース。

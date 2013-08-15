@@ -1,5 +1,5 @@
 /**
- * jquery.forwardpop.js 0.1.0-nb
+ * jquery.forwardpop.js 0.1.1
  * @author Tomoya Koyanagi <tomk79@gmail.com>
  */
 (function($){
@@ -40,7 +40,7 @@
 	 */
 	function bindContents(tpl, data){
 		var rtn = '';
-		while( tpl.match(new RegExp('^(.*?)\\{\\$([a-zA-Z0-9]+)\\}(.*)$','mg') ) ){
+		while( tpl.match(new RegExp('^(.*?)\\{\\$([a-zA-Z0-9]+)\\}(.*)$','m') ) ){
 			rtn += RegExp.$1;
 			rtn += data[RegExp.$2];
 			tpl = RegExp.$3;
